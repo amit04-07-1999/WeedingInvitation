@@ -46,7 +46,7 @@ body,
     left: 0;
     width: 64px;
     height: 64px;
-    background-image: url('Images/Butterfly_cursor_resized.gif');
+    background-image: url('/Images/Butterfly_cursor_resized.gif');
     background-size: contain;
     background-repeat: no-repeat;
     pointer-events: none;
@@ -715,6 +715,15 @@ body,
     background: radial-gradient(ellipse at center, var(--green-accent) 0%, var(--bg-dark) 100%);
 }
 
+.subsection-title {
+    font-family: 'Zeligh Highlight', cursive;
+    font-size: 1rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
 .countdown-container {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -1037,7 +1046,7 @@ body,
     font-family: 'Great Vibes', cursive;
     font-size: 2.2rem;
     color: var(--gold);
-    margin-top: 20px;
+    /* margin-top: 10px; */
 }
 
 .ending-date {
@@ -1045,7 +1054,7 @@ body,
     font-size: 1.2rem;
     color: var(--text-cream);
     letter-spacing: 6px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     opacity: 0.7;
 }
 

@@ -34,8 +34,8 @@ def resize_gif(input_path, output_path, new_size):
         print(f"Resized GIF saved to {output_path} with {len(frames)} frames")
 
 if __name__ == '__main__':
-    img_path = r'd:\WeedingInvitation\Images\Butterfly_cursor.gif'
-    out_path = r'd:\WeedingInvitation\Images\Butterfly_cursor_resized.gif'
+    img_path = r'd:\WeedingInvitation\public\Images\Butterfly_cursor.gif'
+    out_path = r'd:\WeedingInvitation\public\Images\Butterfly_cursor_resized.gif'
     
     if os.path.exists(img_path):
         print(f"Processing {img_path}...")
