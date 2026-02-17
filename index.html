@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon_atoms.ico" type="image/x-icon">
+    <title>Ashish & Sapna | Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Cinzel:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Floating Golden Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Music Toggle Button -->
+    <button id="music-toggle" class="music-btn" aria-label="Toggle Music">
+        <svg id="music-icon-on" class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+        </svg>
+        <svg id="music-icon-off" class="music-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M9 18V5l12-2v13" />
+            <circle cx="6" cy="18" r="3" />
+            <circle cx="18" cy="16" r="3" />
+            <line x1="1" y1="1" x2="23" y2="23" stroke-width="3" />
+        </svg>
+    </button>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ===== SECTION 1: WELCOME ===== -->
+    <section id="welcome" class="section welcome-section">
+        <div class="overlay"></div>
+        <div class="content welcome-content">
+            <div class="ganesh-container">
+                <img src="Images/Buppa.png" alt="Shree Ganesh" class="ganesh-img glow-animation">
+            </div>
+            <!-- <p class="subtitle-script">Shree Ganeshaya Namah</p> -->
+            <img src="Images/Buppa N.png" alt="Shree Ganesh Text" class="ganesh-img-text">
+            <div class="ornament-divider">
+                <img src="Images/leaf w.png" alt="divider" class="divider-img">
+            </div>
+            <p class="welcome-text cinzel">Together with their families</p>
+            <p class="welcome-subtext">request the honour of your presence at the marriage celebration of</p>
+            <div class="scroll-indicator">
+                <span class="scroll-text">Scroll Down</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 2: COUPLE NAMES ===== -->
+    <section id="couple" class="section couple-section">
+        <div class="couple-layout-container">
+            <!-- Left Column: Image -->
+            <div class="couple-image-col fade-in">
+                <div class="couple-img-wrapper">
+                    <img src="Images/couple.png" alt="Ashish & Sapna" class="couple-photo">
+                </div>
+            </div>
+
+            <!-- Right Column: Content -->
+            <div class="couple-content-col">
+                <div class="mandala-bg">
+                    <img src="Images/patch.png" alt="mandala" class="mandala-img">
+                </div>
+                <div class="names-container fade-in">
+                    <h1 class="groom-name name-reveal">Ashish Kumar</h1>
+                    <span class="ampersand">&</span>
+                    <h1 class="bride-name name-reveal">Sapna Kashyap</h1>
+                </div>
+                <div class="ornament-divider fade-in">
+                    <img src="Images/leaf w.png" alt="divider" class="divider-img">
+                </div>
+                <p class="couple-tagline fade-in">are getting married!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 3: WEDDING & MAPS ===== -->
+    <section id="wedding" class="section wedding-section">
+        <div class="content fade-in">
+            <h2 class="section-title cinzel">Wedding Ceremony & Venue</h2>
+            <div class="ornament-divider-small">
+                <img src="Images/leaf w.png" alt="divider" class="divider-img-small">
+            </div>
+
+            <div class="wedding-map-container">
+                <!-- Left Column: Wedding Details -->
+                <div class="wedding-details-col">
+                    <div class="event-card">
+                        <div class="date-highlight">
+                            <span class="day-name">Tuesday</span>
+                            <span class="date-number">10</span>
+                            <span class="month-year">March 2026</span>
+                        </div>
+                        <div class="venue-details">
+                            <h3 class="venue-name">Radhe Garden</h3>
+                            <p class="venue-address">Police Station Lane no. 17A, Main, Bandh Road,<br>Near Neb Sarai,
+                                Sainik
+                                Farm,<br>New Delhi, 110080</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Google Map -->
+                <div class="map-col">
+                    <div class="map-card">
+                        <h3 class="map-title">Location Map</h3>
+                        <div class="map-wrapper">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14024.832962498988!2d77.21059!3d28.50873!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce18e5e1c5c4d%3A0x6c7b3e9e5f1a1b2c!2sSainik+Farm%2C+New+Delhi%2C+Delhi!5e0!3m2!1sen!2sin!4v1700000000000"
+                                width="100%" height="300" style="border:0; border-radius: 12px;" allowfullscreen=""
+                                loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                        <a href="https://goo.gl/maps/YOUR_LINK_HERE" target="_blank" class="glow-btn map-btn"
+                            style="margin-top: 15px; display: inline-block; padding: 10px 30px; font-size: 0.9rem;">Open
+                            in Maps</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECTION 4: COUNTDOWN & RSVP ===== -->
+    <section id="countdown-rsvp" class="section countdown-rsvp-section">
+        <div class="content fade-in">
+            <h2 class="section-title cinzel">Celebrate With Us</h2>
+            <div class="ornament-divider-small">
+                <img src="Images/leaf w.png" alt="divider" class="divider-img-small">
+            </div>
+
+            <div class="countdown-rsvp-container">
+                <!-- Left Column: Countdown -->
+                <div class="countdown-col">
+                    <h3 class="subsection-title">Counting Down</h3>
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-separator">:</div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: RSVP -->
+                <div class="rsvp-col">
+                    <h3 class="subsection-title">RSVP</h3>
+                    <p class="rsvp-subtitle">Kindly let us know if you will be joining us</p>
+                    <form id="rsvp-form" class="rsvp-form">
+                        <div class="form-group">
+                            <label for="rsvp-name">Your Name</label>
+                            <input type="text" id="rsvp-name" name="name" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="rsvp-message">Your Message</label>
+                            <input type="text" id="rsvp-message" name="message" placeholder="Enter your message"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Will you attend?</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="attendance" value="yes" required>
+                                    <span class="radio-custom"></span>
+                                    <span>Joyfully Accept</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="attendance" value="no">
+                                    <span class="radio-custom"></span>
+                                    <span>Regretfully Decline</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="submit" class="rsvp-btn glow-btn">
+                            <span>Send RSVP</span>
+                        </button>
+                    </form>
+                    <div id="rsvp-success" class="rsvp-success hidden">
+                        <div class="success-icon">✓</div>
+                        <p class="success-text">Thank you for your response!</p>
+                        <p class="success-subtext">We look forward to celebrating with you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Confetti Canvas -->
+        <canvas id="confetti-canvas"></canvas>
+    </section>
+
+    <!-- ===== SECTION 5: QR CODE & ENDING ===== -->
+    <section id="qr-ending" class="section qr-ending-section">
+        <div class="content fade-in">
+            <div class="qr-ending-container">
+                <!-- Left Column: QR Code -->
+                <div class="qr-col">
+                    <h2 class="section-title cinzel">Share Invitation</h2>
+                    <div class="ornament-divider-small">
+                        <img src="Images/leaf w.png" alt="divider" class="divider-img-small">
+                    </div>
+                    <p class="qr-subtitle">Scan to share with loved ones</p>
+                    <div class="qr-container">
+                        <div id="qr-code" class="qr-code-box"></div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Ending Message -->
+                <div class="ending-col">
+                    <div class="ganesh-container small">
+                        <img src="Images/Buppa.png" alt="Shree Ganesh" class="ganesh-img-small glow-animation">
+                    </div>
+                    <div class="ornament-divider">
+                        <img src="Images/leaf w.png" alt="divider" class="divider-img">
+                    </div>
+                    <h2 class="ending-message">"Your presence will bless the occasion"</h2>
+                    <div class="ornament-divider">
+                        <img src="Images/leaf w.png" alt="divider" class="divider-img">
+                    </div>
+                    <p class="ending-names">Ashish & Sapna</p>
+                    <p class="ending-date">10 . 03 . 2026</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Dots -->
+    <nav class="nav-dots">
+        <a href="#welcome" class="nav-dot active" data-section="welcome" aria-label="Welcome"></a>
+        <a href="#couple" class="nav-dot" data-section="couple" aria-label="Couple"></a>
+        <a href="#wedding" class="nav-dot" data-section="wedding" aria-label="Wedding"></a>
+        <a href="#countdown-rsvp" class="nav-dot" data-section="countdown-rsvp" aria-label="Countdown & RSVP"></a>
+        <a href="#qr-ending" class="nav-dot" data-section="qr-ending" aria-label="QR & Ending"></a>
+    </nav>
+
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
