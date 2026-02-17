@@ -73,40 +73,124 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     animateParticles();
 
-    // ===== MUSIC TOGGLE =====
+    // ===== MUSIC TOGGLE & PERSISTENCE =====
     const musicBtn = document.getElementById('music-toggle');
     const bgMusic = document.getElementById('bg-music');
     const iconOn = document.getElementById('music-icon-on');
     const iconOff = document.getElementById('music-icon-off');
-    let musicPlaying = false;
+    const musicPrompt = document.getElementById('music-prompt');
 
-    bgMusic.volume = 0.3;
+    // Check localStorage for saved state
+    let musicPlaying = localStorage.getItem('musicPlaying') !== 'false'; // Default to true
+    let savedTime = parseFloat(localStorage.getItem('musicCurrentTime')) || 0;
 
-    musicBtn.addEventListener('click', function () {
+    console.log("Initial State -> Playing:", musicPlaying, "Time:", savedTime);
+
+    bgMusic.volume = 0.4;
+
+    // Ensure accurate time setting if valid
+    if (!isNaN(savedTime) && savedTime > 0) {
+        bgMusic.currentTime = savedTime;
+    }
+
+    // Function to update UI and play/pause
+    function updateMusicUI() {
         if (musicPlaying) {
+            iconOn.classList.remove('hidden');
+            iconOff.classList.add('hidden');
+
+            const playPromise = bgMusic.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log("Audio playing successfully");
+                    if (musicPrompt) musicPrompt.classList.remove('visible');
+                }).catch(error => {
+                    console.warn("Autoplay blocked:", error);
+                    // Show prompt to user
+                    if (musicPrompt) musicPrompt.classList.add('visible');
+
+                    if (musicPrompt) musicPrompt.classList.add('visible');
+
+                    // Add listeners to ENTIRE document to catch ANY interaction
+                    // Using 'capture' phase to catch events early
+                    const enableAudio = () => {
+                        if (musicPlaying) {
+                            bgMusic.play().then(() => {
+                                if (musicPrompt) musicPrompt.classList.remove('visible');
+                                console.log("Audio enabled by USER INTERACTION");
+                                // Remove listeners once successful
+                                ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown', 'scroll', 'wheel', 'resize'].forEach(evt => {
+                                    document.removeEventListener(evt, enableAudio, { capture: true });
+                                    window.removeEventListener(evt, enableAudio, { capture: true });
+                                });
+                            }).catch(e => {
+                                // console.log("Still blocked on this event, keeping listeners:", e);
+                                // Don't remove listeners if still blocked
+                            });
+                        }
+                    };
+
+                    const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown', 'scroll', 'wheel', 'resize'];
+                    events.forEach(evt => {
+                        document.addEventListener(evt, enableAudio, { capture: true, passive: true }); // passive: true for scroll perfs
+                        window.addEventListener(evt, enableAudio, { capture: true, passive: true });
+                    });
+                });
+            }
+        } else {
+            iconOn.classList.add('hidden');
+            iconOff.classList.remove('hidden');
+            bgMusic.pause();
+            if (musicPrompt) musicPrompt.classList.remove('visible');
+        }
+    }
+
+    // Execute initial check slightly delayed to ensure DOM/Audio readiness
+    setTimeout(updateMusicUI, 500);
+
+    // Toggle Button Listener
+    musicBtn.addEventListener('click', function (e) {
+        e.stopPropagation(); // Avoid triggering document-level listeners
+
+        if (musicPlaying) {
+            musicPlaying = false;
             bgMusic.pause();
             iconOn.classList.add('hidden');
             iconOff.classList.remove('hidden');
-            musicPlaying = false;
+            if (musicPrompt) musicPrompt.classList.remove('visible');
         } else {
-            bgMusic.play().catch(() => { });
-            iconOn.classList.remove('hidden');
-            iconOff.classList.add('hidden');
             musicPlaying = true;
-        }
-    });
-
-    // Try autoplay on first user interaction
-    document.addEventListener('click', function autoplayOnce() {
-        if (!musicPlaying) {
+            // When user explicitly clicks button, we can play immediately
             bgMusic.play().then(() => {
-                musicPlaying = true;
                 iconOn.classList.remove('hidden');
                 iconOff.classList.add('hidden');
-            }).catch(() => { });
+                if (musicPrompt) musicPrompt.classList.remove('visible');
+            }).catch(e => console.error("Play failed on click:", e));
         }
-        document.removeEventListener('click', autoplayOnce);
-    }, { once: true });
+
+        // Save state
+        localStorage.setItem('musicPlaying', musicPlaying);
+        localStorage.setItem('musicCurrentTime', bgMusic.currentTime);
+    });
+
+    // Save playback time logic
+    function saveMusicState() {
+        // Only save current time if it's playing or advanced
+        if (bgMusic.currentTime > 0) {
+            localStorage.setItem('musicCurrentTime', bgMusic.currentTime);
+        }
+        localStorage.setItem('musicPlaying', musicPlaying);
+    }
+
+    // Save periodically
+    setInterval(saveMusicState, 1000);
+
+    // Save on visibility change and unload
+    window.addEventListener('beforeunload', saveMusicState);
+    document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') saveMusicState();
+    });
 
     // ===== IMMEDIATELY SHOW WELCOME SECTION =====
     const welcomeFadeIn = document.querySelector('.welcome-section .fade-in');

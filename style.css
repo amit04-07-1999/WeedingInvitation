@@ -98,6 +98,30 @@ body,
     height: 24px;
 }
 
+.music-prompt {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: rgba(11, 61, 46, 0.9);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: 'Zeligh Highlight', cursive;
+    font-size: 0.9rem;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.5s ease;
+}
+
+.music-prompt.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: bounce 2s infinite;
+}
+
 .hidden {
     display: none !important;
 }
