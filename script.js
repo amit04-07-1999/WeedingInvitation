@@ -317,25 +317,53 @@ document.addEventListener('DOMContentLoaded', function () {
     const rsvpSuccess = document.getElementById('rsvp-success');
 
     if (rsvpForm) {
-        rsvpForm.addEventListener('submit', function (e) {
+        rsvpForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
             const formData = new FormData(rsvpForm);
             const name = formData.get('name');
-            const email = formData.get('email');
+            const message = formData.get('message');
             const attendance = formData.get('attendance');
 
-            if (!name || !email || !attendance) return;
+            if (!name || !attendance) return;
 
-            // Hide form, show success
-            rsvpForm.style.display = 'none';
-            if (rsvpSuccess) {
-                rsvpSuccess.classList.remove('hidden');
-            }
+            const submitBtn = rsvpForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = 'Sending...';
+            submitBtn.disabled = true;
 
-            // Launch confetti
-            if (attendance === 'yes') {
-                launchConfetti();
+            try {
+                const response = await fetch('http://localhost:5000/api/rsvp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, message, attendance })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Hide form, show success
+                    rsvpForm.style.display = 'none';
+                    if (rsvpSuccess) {
+                        rsvpSuccess.classList.remove('hidden');
+                    }
+
+                    // Launch confetti
+                    if (attendance === 'yes') {
+                        launchConfetti();
+                    }
+                } else {
+                    alert('Failed to send RSVP. Please try again.');
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong. Please check your connection.');
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
             }
         });
     }
