@@ -32,27 +32,28 @@ html {
     /* overflow-x: hidden; REMOVED to fix sticky sections */
 }
 
-body {
-    font-family: 'Zeligh Highlight', cursive;
-    background-color: var(--bg-primary);
-    color: var(--text-cream);
-    /* overflow-x: hidden; REMOVED to fix sticky sections */
-    line-height: 1.6;
-    cursor: url('Images/Butterfly_cursor.png'), auto;
+/* Force no cursor so we can use the custom JS one */
+html,
+body,
+* {
+    cursor: none !important;
 }
 
-/* Force custom cursor on all interactive elements */
-a,
-button,
-input,
-select,
-textarea,
-label,
-.nav-dot,
-.music-btn,
-.glow-btn,
-[role="button"] {
-    cursor: url('Images/Butterfly_cursor.png'), auto !important;
+/* Custom Cursor Element */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 64px;
+    height: 64px;
+    background-image: url('Images/Butterfly_cursor_resized.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    display: none;
+    /* Hidden by default until JS enables it */
 }
 
 /* ===== PARTICLES CANVAS ===== */

@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
             iconOff.classList.remove('hidden');
             musicPlaying = false;
         } else {
-            bgMusic.play().catch(() => {});
+            bgMusic.play().catch(() => { });
             iconOn.classList.remove('hidden');
             iconOff.classList.add('hidden');
             musicPlaying = true;
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 musicPlaying = true;
                 iconOn.classList.remove('hidden');
                 iconOff.classList.add('hidden');
-            }).catch(() => {});
+            }).catch(() => { });
         }
         document.removeEventListener('click', autoplayOnce);
     }, { once: true });
@@ -334,5 +334,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+
+
+    // ===== CUSTOM CURSOR =====
+    const customCursor = document.querySelector('.custom-cursor');
+
+    if (customCursor) {
+        document.addEventListener('mousemove', (e) => {
+            customCursor.style.left = `${e.clientX}px`;
+            customCursor.style.top = `${e.clientY}px`;
+            customCursor.style.display = 'block';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            customCursor.style.display = 'none';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            customCursor.style.display = 'block';
+        });
+
+        // Hide default cursor interaction
+        document.querySelectorAll('a, button, input, [role="button"]').forEach(el => {
+            el.style.cursor = 'none';
+        });
+    }
 
 });
