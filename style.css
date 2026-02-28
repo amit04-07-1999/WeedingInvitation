@@ -188,13 +188,18 @@ body,
     background: radial-gradient(ellipse at center top, var(--bg-primary) 0%, var(--bg-dark) 100%);
 }
 
-.countdown-rsvp-section {
+.reception-section {
     z-index: 4;
     background: radial-gradient(ellipse at center top, var(--bg-primary) 0%, var(--bg-dark) 100%);
 }
 
-.qr-ending-section {
+.countdown-rsvp-section {
     z-index: 5;
+    background: radial-gradient(ellipse at center top, var(--bg-primary) 0%, var(--bg-dark) 100%);
+}
+
+.qr-ending-section {
+    z-index: 6;
     background: radial-gradient(ellipse at center top, var(--bg-primary) 0%, var(--bg-dark) 100%);
 }
 
